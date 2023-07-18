@@ -1,0 +1,25 @@
+mkdir calc_features_test
+cd calc_features_test
+cargo new --lib adder --vcs=none
+cargo new --bin printer --vcs=none
+
+cargo build
+
+./target/debug/printer // OK
+
+cargo run // error: `cargo run` could not determine which binary to run. Use the `--bin` option to specify a binary, or the `default-run` manifest key.
+available binaries: adder, printer
+
+cargo run -p adder // OK
+cargo run -package printer // OK
+cargo run -p adder --lib // OK
+cargo run --bin printer // OK
+cargo run --bin printer --no-default-features // OK
+cargo run --bin printer --no-default-features --features rnd // OK
+
+Search dependencies:
+cargo search rand
+
+dependencies tree:
+cargo tree
+cargo tree -p adder --no-default-features
