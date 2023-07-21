@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::ErrorKind;
+use std::convert::From;
 
 // Debug
 #[derive(Debug)]
@@ -43,6 +44,19 @@ impl Error for SuperErrorSideKick {}
 fn get_super_error() -> Result<(), SuperError> {
     Err(SuperError { source: SuperErrorSideKick })
 }
+
+// From-Into example
+#[derive(Debug)]
+struct GFG {
+    year: i32,
+}
+ 
+impl From<i32> for GFG {
+    fn from(item: i32) -> Self {
+        GFG {year: item }
+    }
+}
+
 
 
 fn main() {
@@ -91,5 +105,11 @@ fn main() {
         },
     };
 
+    // From-Into example
+    let num_1 = GFG::from(2023);
+    println!("learning Rust from {:?}", num_1);
+    let int_var = 2023;
+    let num_2: GFG = int_var.into();
+    println!("Learning Rust from {:?}", num_2);
 
 }
